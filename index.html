@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Namma Seva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="sr" id="live" role="status" aria-live="polite"></div>
+<div class="wrap">
+  <header>
+    <span class="eyebrow"><b class="brand">Namma Seva</b> · Central and state schemes</span>
+    <h1>Find the schemes you qualify for</h1>
+    <p>Answer a few questions to see which central and state schemes you may qualify for, why they match, and what to bring when you apply.</p>
+    <p class="meta" id="meta"></p>
+    <div class="mode" role="group" aria-label="How to enter your details">
+      <button type="button" data-mode="chat" aria-pressed="false">Chat</button>
+      <button type="button" data-mode="form" aria-pressed="true">Form</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="panel" id="panel" aria-label="Your details">
+      <div class="panel-head">
+        <h2>Your details</h2>
+        <button class="btn-ghost" id="reset" type="button">Clear all</button>
+      </div>
+      <p class="example-note" id="exampleNote" hidden>Showing an example profile. Change any answer or clear all to enter your own.</p>
+
+      <div class="progress"><div class="meter"><i id="meterFill"></i></div><span id="meterText"></span></div>
+      <h3 class="sect">About you</h3>
+      <div class="field"><label for="state">State or union territory</label>
+        <select id="state"><option value="">Select</option><option value="KA">Karnataka</option><option value="MH">Maharashtra</option><option value="TN">Tamil Nadu</option><option value="UP">Uttar Pradesh</option><option value="other">Another state or UT</option></select></div>
+      <div class="grid2">
+        <div class="field"><label for="age">Age</label><input id="age" type="number" inputmode="numeric" min="0" max="110" placeholder="e.g. 34"></div>
+        <div class="field"><label for="gender">Gender</label>
+          <select id="gender"><option value="">Select</option><option value="female">Woman</option><option value="male">Man</option><option value="other">Other</option></select></div>
+      </div>
+      <div class="field"><label for="income">Household income per year</label>
+        <select id="income">
+          <option value="">Select</option>
+          <option value="1">Up to ₹1 lakh</option><option value="1.5">₹1 – 1.5 lakh</option><option value="2">₹1.5 – 2 lakh</option>
+          <option value="2.5">₹2 – 2.5 lakh</option><option value="3">₹2.5 – 3 lakh</option><option value="4.5">₹3 – 4.5 lakh</option>
+          <option value="6">₹4.5 – 6 lakh</option><option value="8">₹6 – 8 lakh</option><option value="9">₹8 – 9 lakh</option><option value="99">Above ₹9 lakh</option>
+        </select></div>
+      <div class="grid2">
+        <div class="field"><label for="cat">Social category</label>
+          <select id="cat"><option value="">Select</option><option value="general">General</option><option value="obc">OBC</option><option value="sc">SC</option><option value="st">ST</option></select></div>
+        <div class="field"><label for="area">Where you live</label>
+          <select id="area"><option value="">Select</option><option value="rural">Village / rural</option><option value="urban">Town / city</option></select></div>
+      </div>
+      <label class="check"><input type="checkbox" id="minority"><span>Belong to a notified minority (Muslim, Christian, Sikh, Buddhist, Jain or Parsi)</span></label>
+
+      <h3 class="sect">Work and study</h3>
+      <fieldset>
+        <legend class="legend">What do you do? (pick all that apply)</legend>
+        <div class="chips" id="occ"></div>
+      </fieldset>
+
+      <div class="grid2">
+        <div class="field"><label for="land">Farm land you own</label>
+          <select id="land"><option value="na">Not applicable</option><option value="small">Up to 2 hectares</option><option value="large">More than 2 hectares</option></select></div>
+        <div class="field"><label for="edu">Studying now</label>
+          <select id="edu"><option value="none">Not studying</option><option value="school9_10">Class 9 – 10</option><option value="school11_12">Class 11 – 12</option><option value="ug">Diploma / graduation</option><option value="pg">Post-graduation</option></select></div>
+      </div>
+      <h3 class="sect">Your situation</h3>
+      <div class="field"><label for="disab">Disability (certified)</label>
+        <select id="disab"><option value="none">None</option><option value="40">40% to 79%</option><option value="80">80% or more</option></select></div>
+
+      <fieldset>
+        <legend class="legend">Does any of this apply?</legend>
+        <div class="checks" id="flags"></div>
+      </fieldset>
+    </aside>
+
+    <section class="chat" id="chat" aria-label="Chat" hidden></section>
+
+    <main class="results" id="main">
+      <div class="summary">
+        <div class="counts" id="counts"></div>
+        <div class="actions"><button class="btn-ghost" id="toggleAll" type="button">Show all details</button><button class="btn-ghost" id="copy" type="button">Copy my list</button></div>
+      </div>
+      <div class="toolbar">
+        <input id="q" type="search" placeholder="Search schemes, e.g. pension, loan, scholarship" aria-label="Search schemes" style="width:100%;font:inherit;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:9px 10px;">
+        <div class="filters" id="filters"></div>
+      </div>
+      <div id="results" class="results"></div>
+    </main>
+  </div>
+
+  <footer>
+    <p>Rules are summarised from public scheme guidelines and were last reviewed on 22 November 2026. Benefits, income limits and application windows change, and state governments add their own conditions. This is guidance, not an official decision. Confirm every scheme on its official portal or at your nearest Common Service Centre before you apply.</p>
+    <p>Central schemes apply across India. State schemes are included only for Karnataka, Maharashtra, Tamil Nadu and Uttar Pradesh. Their rules were checked mainly against news and secondary sources because official portals could not be opened, and several are changing, so confirm on the state portal. <a href="https://www.myscheme.gov.in" target="_blank" rel="noopener">myScheme.gov.in</a> lets you search central and state schemes together.</p>
+  </footer>
+</div>
+<div class="jump" id="jump" hidden><span id="jumpText"></span><button type="button" class="btn" id="jumpBtn">See matches</button></div>
+<script src="app.js"></script>
+</body>
+</html>
